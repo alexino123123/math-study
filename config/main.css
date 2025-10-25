@@ -1,186 +1,61 @@
-/* Import custom styles */
-@import url(/./config/custom.css);
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+/* --- Cookie Clicker image button styles (gradient sized to the logo) --- */
+/* Replace previous cookie-img-btn / ::before rules with this block. */
 
-:root {
-  --background-color: #5DBAE8 !important;
-  --text-color: black !important;
-  --accent-color: #4b87f7 !important;
-}
-
-
-* {
-  font-family: ubuntu;
-  transition: all 0.3s ease;
-}
-/* General styles */
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  font-family: "ubuntu", sans-serif;
-  margin: 0;
-  padding: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-/* Search input styles */
-#searchInput {
-  padding: 17px;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-  width: 100%; /* Occupy full width */
-  max-width: 400px; /* Limit maximum width */
-  margin: 20px auto; /* Center horizontally */
-  border-radius: 10px;
-  border: none;
-  font-size: 24px;
-  user-select: none;
-  outline: none;
-  text-align: center;
-  transition: all 0.3s ease-in-out;
-}
-#searchInput:focus {
-border: 3px solid var(--accent-color);
-}
-
-/* Games container styles */
-#gamesContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  padding: 0 20px; /* Add padding to the sides */
-  box-sizing: border-box;
-}
-
-/* Game card styles */
-.game {
-  margin: 10px;
-  
-  text-align: center;
-  flex: 1 0 200px; /* Flexbox item properties */
-  max-width: 200px; /* Limit maximum width */
-  display: inline-block;
-  margin: 10px;
-  transition: transform 0.3s ease;
-  border: 2px;
-  border-radius: 10px;
-}
-.game:hover {
-  transform: scale(0.95); /* Scale up on hover */
-  border: 2px solid var(--accent-color);
-  
-  
-}
-/* Game image styles */
-.game img {
-  width: 100%; /* Occupy full width of container */
-  max-width: 100%; /* Ensure image does not exceed container width */
-  height: auto; /* Maintain aspect ratio */
-  cursor: pointer;
-  width: 200px;
-  height: 200px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-}
-
-/* Game description styles */
-.game p {
-  margin-top: 5px;
-  font-weight: 600;
-}
-
-/* Responsive adjustments */
-@media only screen and (max-width: 600px) {
-  .game {
-    flex-basis: calc(50% - 20px); /* Two games per row */
-  }
-}
-
-@media only screen and (max-width: 400px) {
-  .game {
-    flex-basis: calc(100% - 20px); /* Single game per row */
-  }
-}
-.center {
-  justify-content: center;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-}
-@media only screen and (max-width: 450px) {
-  #searchInput {
-    width: 200px;
-  }
-}
-.footer {
-  margin: 10px auto;
-  bottom: 0;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-
-
-}
-.link {
-  color: var(--accent-color);
-  text-decoration: none;
-}
-
-/* --- Cookie Clicker image button styles (gradient background 2x as wide) --- */
 .cookie-btn-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Button reset + decorative background using ::before */
+/* Small padding so background shows around image; use --bg-extra to control how much wider the
+   background should be compared to the image. Adjust the value to increase/decrease the bleed. */
 .cookie-img-btn {
+  --bg-extra: 60px;             /* default extra width for the background (change as needed) */
   position: relative;
   background: transparent;
   border: none;
-  padding: 8px; /* space so background shows around image */
+  padding: 6px;                 /* small padding */
   cursor: pointer;
   display: inline-block;
   line-height: 0;
-  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 18px;
+  border-radius: 14px;
   overflow: visible;
   z-index: 0;
 }
 
-/* Decorative gradient background twice as wide (200% of button width) */
+/* Decorative gradient background sized relative to the button (image) */
 .cookie-img-btn::before {
   content: "";
   position: absolute;
   left: 50%;
   top: 50%;
+  /* width is button width plus extra bleed from --bg-extra */
+  width: calc(100% + var(--bg-extra));
+  /* make the background slightly taller than the button content */
+  height: calc(100% + 14px);
   transform: translate(-50%, -50%);
-  width: 400%; /* make the gradient twice as wide as before (was 200%) */
-  height: 110%;
   background: linear-gradient(135deg, #ffb03b 0%, #ff7a18 50%, #ff4e4e 100%);
-  border-radius: 20px;
+  border-radius: 18px;
   z-index: -1;
   box-shadow: 0 10px 26px rgba(255, 120, 30, 0.18);
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
   pointer-events: none;
 }
 
-/* Image inside the button */
+/* The image inside the button */
 .cookie-btn-image {
   display: block;
-  width: 120px;
+  width: 120px;   /* default image width */
   height: auto;
   max-height: 120px;
   object-fit: contain;
-  transition: transform 160ms ease;
+  transition: transform 150ms ease;
   border-radius: 10px;
 }
 
-/* Hover / focus */
+/* Hover / focus effects */
 .cookie-img-btn:hover,
 .cookie-img-btn:focus {
   transform: translateY(-3px);
@@ -188,14 +63,13 @@ border: 3px solid var(--accent-color);
   filter: saturate(1.03) brightness(1.02);
   outline: none;
 }
-
 .cookie-img-btn:hover::before,
 .cookie-img-btn:focus::before {
   transform: translate(-50%, -50%) scale(1.03);
   box-shadow: 0 20px 36px rgba(255, 120, 30, 0.22);
 }
 
-/* Active */
+/* Active press state */
 .cookie-img-btn:active {
   transform: translateY(-1px) scale(0.995);
   box-shadow: 0 6px 12px rgba(0,0,0,0.10);
@@ -205,15 +79,15 @@ border: 3px solid var(--accent-color);
   box-shadow: 0 8px 16px rgba(255, 120, 30, 0.12);
 }
 
+/* Responsive sizing */
 @media (min-width: 900px) {
   .cookie-btn-image {
     width: 150px;
     max-height: 150px;
   }
-  .cookie-img-btn::before {
-    height: 120%;
-    border-radius: 22px;
-  }
+  /* increase bg-extra slightly for larger displays */
+  .cookie-img-btn { --bg-extra: 90px; }
+  .cookie-img-btn::before { height: calc(100% + 20px); border-radius: 20px; }
 }
 
 @media (max-width: 420px) {
@@ -221,26 +95,6 @@ border: 3px solid var(--accent-color);
     width: 100px;
     max-height: 100px;
   }
-  .cookie-img-btn {
-    padding: 6px;
-    border-radius: 14px;
-  }
-  .cookie-img-btn::before {
-    width: 400%;
-    height: 115%;
-    border-radius: 16px;
-  }
-}
-
-/* Accessibility helper (screen-reader-only text) */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
+  .cookie-img-btn { padding: 4px; border-radius: 12px; --bg-extra: 48px; }
+  .cookie-img-btn::before { height: calc(100% + 12px); border-radius: 14px; }
 }
