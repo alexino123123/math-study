@@ -49,3 +49,25 @@ a:hover {
   justify-content: center;
   flex-wrap: wrap;
 }
+/* --- Fixed Home Button --- */
+.home-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  text-decoration: none;
+  background: #00ffc6;
+  color: #111;
+  padding: 0.75em 1.5em;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: 0 0 12px #00ffc666;
+  transition: all 0.2s ease;
+  z-index: 1000; /* ensures it stays above game elements */
+}
+
+.home-button:hover {
+  background: #00cfa3;
+  transform: scale(1.05);
+  box-shadow: 0 0 18px #00ffc6aa;
+}
