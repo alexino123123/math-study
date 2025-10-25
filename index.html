@@ -1,32 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home</title>
-    <link rel="stylesheet" href="config/main.css" />
-    <script src="config/main.js" type="module"></script>
-  </head>
-  <body>
-    <div class="center">
-      <h1 id="title"></h1>
-      <p id="subtitle"></p>
-    </div>
-    <div class="center">
-      <input type="text" id="searchInput" placeholder="Search games" />
-    </div>
+/* --- Cookie Clicker button styles --- */
+/* Add this to the end of config/main.css (or merge into your button rules). */
 
-    <!-- Button linking to cookieclicker.html -->
-    <div class="center" style="margin-top:16px;">
-      <a href="cookieclicker.html" style="text-decoration: none;">
-        <button type="button" id="cookieBtn">Play Cookie Clicker</button>
-      </a>
-    </div>
+.cookie-btn-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    <div id="gamesContainer"></div>
-    <div class="footer">
-      <a style="font-weight: 700">a site by
-      </a><a style="font-weight: 700" class="link" href="https://dsc.gg/parcoil">parcoil network</a>
-    </div>
-  </body>
-</html>
+/* Main button */
+.cookie-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #ffb03b 0%, #ff7a18 50%, #ff4e4e 100%);
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(255, 110, 30, 0.18), inset 0 -2px 0 rgba(255,255,255,0.08);
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  text-decoration: none;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Icon inside button */
+.cookie-btn .cookie-icon {
+  font-size: 22px;
+  transform: translateY(0);
+  transition: transform 160ms ease;
+}
+
+/* Hover / focus */
+.cookie-btn:hover,
+.cookie-btn:focus {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 30px rgba(255, 110, 30, 0.22), inset 0 -2px 0 rgba(255,255,255,0.06);
+  filter: saturate(1.05);
+  outline: none;
+}
+
+/* Active press state */
+.cookie-btn:active {
+  transform: translateY(-1px) scale(0.995);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+
+/* Small screens: make it responsive */
+@media (max-width: 420px) {
+  .cookie-btn {
+    padding: 12px 16px;
+    font-size: 16px;
+    border-radius: 10px;
+  }
+  .cookie-btn .cookie-icon {
+    font-size: 20px;
+  }
+}
