@@ -128,41 +128,61 @@ border: 3px solid var(--accent-color);
   color: var(--accent-color);
   text-decoration: none;
 }
-/* --- Cookie Clicker image button styles --- */
-/* Add/merge this at the end of config/main.css */
+/* --- Cookie Clicker image button styles (updated: orange gradient background 2x as wide) --- */
+/* Replace or append this block at the end of config/main.css */
 
+/* Wrapper keeps the button centered */
 .cookie-btn-wrap {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Button wrapper — remove default button styles */
+/* Button reset + positioning to allow a decorative background that is wider than the image */
 .cookie-img-btn {
+  position: relative; /* needed for pseudo-element background */
   background: transparent;
   border: none;
-  padding: 0;
+  padding: 8px; /* small padding so background shows around image */
   cursor: pointer;
   display: inline-block;
-  line-height: 0; /* collapse line height so image fits exactly */
+  line-height: 0;
   transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
   -webkit-tap-highlight-color: transparent;
-  border-radius: 12px; /* subtle rounding for hover shadow clipping */
-  overflow: hidden;
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  border-radius: 18px; /* rounded corners for the background */
+  overflow: visible; /* allow pseudo-element to extend beyond the image width */
+  z-index: 0; /* stacking context so ::before sits behind */
+}
+
+/* The decorative gradient background that is twice as wide as the button content */
+.cookie-img-btn::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 200%; /* 2x as wide as the button (image + padding) */
+  height: 110%; /* slightly taller so the background peeks above/below the image */
+  background: linear-gradient(135deg, #ffb03b 0%, #ff7a18 50%, #ff4e4e 100%);
+  border-radius: 20px;
+  z-index: -1; /* behind the image */
+  box-shadow: 0 10px 26px rgba(255, 120, 30, 0.18);
+  transition: transform 160ms ease, box-shadow 160ms ease, filter 160ms ease;
+  pointer-events: none; /* background shouldn't catch pointer events */
 }
 
 /* The image inside the button */
 .cookie-btn-image {
-  display: block; /* remove inline gap */
-  width: 140px;   /* default width — less wide, taller look */
+  display: block;
+  width: 140px;   /* default width for the image */
   height: auto;
   max-height: 140px;
   object-fit: contain;
   transition: transform 160ms ease;
+  border-radius: 12px; /* small rounding to visually integrate with background */
 }
 
-/* Hover / focus effects */
+/* Hover / focus effects (also animate background slightly) */
 .cookie-img-btn:hover,
 .cookie-img-btn:focus {
   transform: translateY(-4px);
@@ -171,10 +191,20 @@ border: 3px solid var(--accent-color);
   outline: none;
 }
 
+.cookie-img-btn:hover::before,
+.cookie-img-btn:focus::before {
+  transform: translate(-50%, -50%) scale(1.03);
+  box-shadow: 0 20px 36px rgba(255, 120, 30, 0.22);
+}
+
 /* Active press state */
 .cookie-img-btn:active {
   transform: translateY(-1px) scale(0.995);
   box-shadow: 0 6px 12px rgba(0,0,0,0.12);
+}
+.cookie-img-btn:active::before {
+  transform: translate(-50%, -50%) scale(0.99);
+  box-shadow: 0 8px 16px rgba(255, 120, 30, 0.12);
 }
 
 /* Larger display on wide viewports if desired */
@@ -183,17 +213,30 @@ border: 3px solid var(--accent-color);
     width: 180px;
     max-height: 180px;
   }
+  .cookie-img-btn::before {
+    height: 120%;
+    border-radius: 22px;
+  }
 }
 
-/* Smaller screens: keep it tall but not too wide */
+/* Smaller screens: keep it tall but not too wide and preserve 2x background behavior */
 @media (max-width: 420px) {
   .cookie-btn-image {
     width: 120px;
     max-height: 120px;
   }
+  .cookie-img-btn {
+    padding: 6px;
+    border-radius: 14px;
+  }
+  .cookie-img-btn::before {
+    width: 200%;
+    height: 115%;
+    border-radius: 16px;
+  }
 }
 
-/* Optional: if you still want a text label for accessibility visible to screen readers only */
+/* Accessibility helper (screen-reader-only text) */
 .sr-only {
   position: absolute;
   width: 1px;
