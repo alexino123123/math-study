@@ -1,0 +1,51 @@
+/* --- Body styles --- */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #111, #1a1a40, #0b3b5e);
+  color: #f0f0f0;
+  text-align: center;
+  padding: 20px;
+}
+
+/* --- Page titles --- */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 1em;
+  color: #00ffc6;
+  text-shadow: 0 0 10px #00ffc633;
+}
+
+/* --- Buttons --- */
+a {
+  text-decoration: none;
+  background: #00ffc6;
+  color: #111;
+  padding: 1em 2em;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1.25rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 12px #00ffc666;
+  display: inline-block;
+  margin: 10px;
+}
+
+a:hover {
+  background: #00cfa3;
+  transform: scale(1.05);
+  box-shadow: 0 0 18px #00ffc6aa;
+}
+
+/* --- Home button specific styles --- */
+.home-button {
+  margin-bottom: 20px;
+}
+
+/* --- Container for multiple buttons --- */
+.links {
+  display: flex;
+  gap: 1em;
+  justify-content: center;
+  flex-wrap: wrap;
+}
